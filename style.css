@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-image: url('img3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+#title {
+    color: hsl(104, 69%, 35%);
+    font-size: clamp(32px, 8vw, 70px);
+    margin-left: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 10px;
+}
+
+#para {
+    color: hsl(104, 69%, 35%);
+    font-size: clamp(16px, 4vw, 24px);
+    text-align: center;
+    height: fit-content;
+    background-color: rgba(118, 234, 9, 0.595);
+}
+
+.navbar ul {
+    list-style-type: none;
+    background-color: hsl(0, 69%, 46%);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar li {
+    flex: 1;
+    min-width: 60px;
+}
+
+.navbar a {
+    display: block;
+    padding: 12px 0;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: clamp(12px, 3vw, 16px);
+    line-height: 1;
+}
+
+.navbar a:hover {
+    background-color: rgb(238, 151, 151);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* ← force all 3 on same row */
+    gap: clamp(8px, 2vw, 30px);
+    margin-top: clamp(20px, 5vw, 50px);
+    padding: 0 10px;
+    perspective: 100px;
+}
+
+/* OUTER */
+.box {
+    width: clamp(90px, 25vw, 180px);
+    height: clamp(150px, 42vw, 300px);
+    min-width: 90px; /* prevents wrapping too early */
+    cursor: pointer;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+}
+
+/* INNER (this flips) */
+.inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+@media (hover: hover) {
+    .box:hover .inner {
+        animation: spinFlip 10s ease forwards;
+    }
+}
+
+.rotate .inner {
+    animation: spinFlip 10s ease forwards;
+}
+
+/* FRONT + BACK */
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-size: clamp(1.8em, 5vw, 3em);
+    border-radius: 10px;
+    backface-visibility: hidden;
+}
+
+/* FRONT */
+.front {
+    color: white;
+    overflow: hidden;
+    background: linear-gradient(145deg, hsl(0, 93%, 46%), hsl(0, 7%, 19%));
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.4),
+                inset 3px 3px 8px rgba(255,255,255,0.2);
+}
+
+.front img,
+.back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* BACK */
+.back {
+    color: white;
+    transform: rotateY(180deg);
+    overflow: hidden;
+    background: linear-gradient(145deg, #1a1a1a, #000);
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6),
+                inset 3px 3px 8px rgba(255,255,255,0.05);
+}
+
+@keyframes spinFlip {
+    100% {
+        transform: rotateY(1620deg);
+    }
+}
+
+.caption {
+    font-size: clamp(11px, 3vw, 18px);
+    margin: 0;
+    text-align: center;
+    padding: 4px;
+}
+
+#bottom-text {
+    text-align: center;
+    color: hsl(104, 69%, 35%);
+    font-size: clamp(60px, 15vw, 150px);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+    margin-top: 30px;
+    letter-spacing: 10px;
+    user-select: none; /* can't select/highlight it */
+}
